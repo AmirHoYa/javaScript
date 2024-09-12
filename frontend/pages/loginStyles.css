@@ -1,0 +1,60 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#loginContainer, #registrationContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 40vw;
+    margin-bottom: 20px;
+}
+
+#loginContainer h1, #registrationContainer h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#loginContainer div, #registrationContainer div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#loginContainer label, #registrationContainer label {
+    width: 30%;
+    text-align: left;
+    margin-right: 10px;
+}
+
+#loginContainer input, #registrationContainer input {
+    width: 65%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#loginButtonContrainer, #registrationButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}

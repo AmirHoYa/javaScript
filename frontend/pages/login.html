@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYM SAMA</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="icon" href="" type="image/x-icon" class="logo">
+    <link rel="stylesheet" href="loginStyles.css">
+</head>
+<body>
+    <main>
+        <form>
+        <div id="loginContainer">
+            <h1>Login</h1>
+            <div>
+                <label for="loginEmail">E-Mail:</label>
+                <input id="loginEmail" type="email" required>
+            </div>
+            <div>
+                <label for="password">Passwort:</label>
+                <input id="password" type="password" required>
+            </div>
+            <div id="loginButtonContrainer">
+                <button id="loginButton" type="submit">Login</button>
+            </div>
+        </div>
+        <div id="registrationContainer">
+            <h1>Registrierung</h1>
+            <div>
+                <label for="registrationSureName">Vorname</label>
+                <input id="registrationSureName" type="text" required>
+            </div>
+            <div>
+                <label for="registrationLastName">Nachname</label>
+                <input id="registrationLastName" type="text" required>
+            </div>
+            <div>
+                <label for="registrationDateOfBirth">Geburtsdatum</label>
+                <input id="registrationDateOfBirth" type="date" value="2024-09-11" min="1960-01-01" required>
+            </div>
+            <div>
+                <label for="registrationPostcode">PLZ</label>
+                <input id="registrationPostcode" type="number" required>
+            </div>
+            <div>
+                <label for="registrationLocation">Ort</label>
+                <input id="registrationLocation" type="text" required>
+            </div>
+            <div>
+                <label for="registrationAdress">Straße und Hausnummer</label>
+                <input id="registrationAdress" type="text" required>
+            </div>
+            <div>
+                <label for="registrationMail">E-Mail</label>
+                <input id="registrationMail" type="email" required>
+            </div>
+            <div>
+                <label for="registrationPassword">Passwort</label>
+                <input id="registrationPassword" type="password" required>
+            </div>
+            <div>
+                <label for="registrationRepeatPassword">Passwort wiederholen</label>
+                <input id="registrationRepeatPassword" type="password" required>
+            </div>
+            <div id="registrationButtonContainer">
+                <button id="registrationButton" type="submit">Registrieren</button>
+            </div>
+        </div>
+        </form>
+    </main>
+</body>
+</html>
