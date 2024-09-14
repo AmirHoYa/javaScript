@@ -22,7 +22,7 @@ app.post('/login', (req, res) => {
     };
 
     if (users[loginEmail] && users[loginEmail] === password) {
-        res.send('Login erfolgreich! Willkommen, ' + loginEmail);
+        res.redirect('/index.html');
     } else {
         res.send('Login fehlgeschlagen! Ungültige E-Mail oder Passwort.');
     }

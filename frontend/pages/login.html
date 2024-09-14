@@ -39,8 +39,18 @@
                 },
                 body: JSON.stringify({ loginEmail: email, password: password })
             })
-            .then(response => response.text())
-            .then(data => alert(data))
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    return response.text();
+                }
+            })
+            .then(data => {
+                if (data) {
+                    alert(data);
+                }
+            })
             .catch(error => console.error('Error:', error));
         });
     </script>
