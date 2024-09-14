@@ -3,23 +3,23 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 
-const users = {
-    "test@user.de": "12345678"
-};
-
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages')));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'index.html'));
 });
 
-app.get('/login.html', (req, res) => {
+app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'login.html'));
 });
 
 app.post('/login', (req, res) => {
     const { loginEmail, password } = req.body;
+
+    const users = {
+        "test@user.de": "password123"
+    };
 
     if (users[loginEmail] && users[loginEmail] === password) {
         res.send('Login erfolgreich! Willkommen, ' + loginEmail);
