@@ -1,0 +1,10 @@
+header {
+    background-color: aquamarine;
+
+}
+
+header a::after {
+    display: block;
+    height: 3px;
+    background-color: blueviolet;
+}
