@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GYM SAMA</title>
     <link rel="stylesheet" href="trainingdataStyles.css">
+    <link rel="stylesheet" href="../global-styles.css">
 </head>
 <body>
     <header>
@@ -12,28 +13,38 @@
             <div class="nav-container">
                 <ul>
                     <li><a href="/index.html">Homepage</a></li>
-                    <li><a href="">Angebote</a></li>
-                    <li><a href="">Blabla</a></li>
+                    <li><a href="#">Angebote</a></li>
+                    <li><a href="#">Blabla</a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
         <h1>Meine Trainingsdaten</h1>
-        <table id="trainingTable">
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Übung</th>
-                    <th>Dauer</th>
-                    <th>Kalorien</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Daten werden hier eingefügt -->
-            </tbody>
-        </table>
+        <div class="table-container">
+            <table id="trainingTable">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Übung</th>
+                        <th>Dauer</th>
+                        <th>Kalorien</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div id="trainerInfo">
+                <h2>Ihr persönlicher Trainer</h2>
+                <img src="trainer.jpg" alt="MaxMustermann" id="trainerImage">
+                <p>Max Mustermann</p>
+                <button id="saveAsPdfButton">Tabelle als PDF speichern und per E-Mail senden an Ihren persönlichen Trainer</button>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.15/jspdf.plugin.autotable.min.js"></script>
         <script src="trainingdata.js"></script>
+        <script src="pdfAndEmail.js"></script>
     </main>
 </body>
 </html>

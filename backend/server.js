@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages')));
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages', 'trainingdata')));
 app.use(bodyParser.json());
 
 const trainingData = {
@@ -35,7 +36,7 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.get('/trainingdata.html', (req, res) => {
+app.get('/trainingdata', (req, res) => {
     const { loggedIn, email } = req.query;
     
     if (loggedIn !== 'true') {
@@ -46,7 +47,8 @@ app.get('/trainingdata.html', (req, res) => {
         return res.redirect('/login');
     }
 
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'trainingdata', 'trainingdata.html'));
+    const data = trainingData[email] || [];
+    res.json(data);
 });
 
 const port = 3000;

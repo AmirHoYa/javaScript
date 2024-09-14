@@ -16,9 +16,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Daten von der API abrufen
-    fetch(`/trainingdata.html?loggedIn=${loggedIn}&email=${encodeURIComponent(email)}`)
-        .then(response => response.json())
+    fetch(`/trainingdata?loggedIn=${loggedIn}&email=${encodeURIComponent(email)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Netzwerkantwort war nicht ok.');
+            }
+            return response.json();
+        })
         .then(data => {
             const tableBody = document.querySelector('#trainingTable tbody');
             data.forEach(item => {
@@ -33,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Fehler:', error);
             alert('Fehler beim Abrufen der Trainingsdaten.');
         });
 });
