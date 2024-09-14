@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-bottom: 1px solid #eeeeee;
+}
+
+header div {
+}
+
+header h1 {
+    line-height: 100px;
+    font-size: 70px;
+    width: fit-content;
+}
+
+h1#page-title {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav {
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    float: right;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    line-height: 97px;
+    padding: 0 16px;
+    text-decoration: none;
+    color: #333333;
+}
+
+nav a.active {
+    background-color: #eeeeee;
+    border-bottom: 3px solid #8000ff;
+}
+
+nav a:hover {
+    border-bottom: 3px solid #8000ff;
+}
