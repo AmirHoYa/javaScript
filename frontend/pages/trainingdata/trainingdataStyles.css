@@ -1,4 +1,3 @@
-/* Main-Bereich */
 main {
     max-width: 1200px;
     margin: 20px auto;
@@ -7,7 +6,6 @@ main {
     border-radius: 8px;
 }
 
-/* Tabelle */
 .table-container {
     overflow-x: auto;
 }
@@ -38,7 +36,6 @@ h1 {
     text-align: center;
 }
 
-/* Beispielhafte Styles für die Tabelle und den Trainer-Bereich */
 #trainingTable {
     width: 100%;
     border-collapse: collapse;
@@ -51,18 +48,16 @@ h1 {
     text-align: center;
 }
 
-/* Container für Bilder */
 #trainerInfo {
     text-align: center;
 }
 
-/* Stil für das Trainerbild */
 #trainerImage {
-    width: 200px; /* Feste Breite */
-    height: 200px; /* Feste Höhe */
-    object-fit: cover; /* Bild in den Container anpassen */
-    border-radius: 10px; /* Abgerundete Ecken (optional) */
-    border: 2px solid #ddd; /* Rand um das Bild (optional) */
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #ddd;
 }
 #saveAsPdfButton {
     margin-top: 10px;

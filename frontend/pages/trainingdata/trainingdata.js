@@ -56,20 +56,13 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Fehler beim Abrufen der Trainingsdaten.');
         });
 
-    // Logout-Button-Event hinzufügen
+    // Logout-Button-Event
     const logoutButton = document.getElementById('logoutBtn');
     if (logoutButton) {
         logoutButton.addEventListener('click', function() {
-            if (loggedIn) {
-                // URL-Parameter entfernen
-                urlParams.delete('loggedIn');
-                urlParams.delete('email');
-                
-                // URL aktualisieren und zur Startseite weiterleiten
-                const newUrl = `${window.location.origin}/index.html`; // Weiterleitung zur Startseite
-                history.replaceState(null, '', newUrl);
+            if (loggedIn) {      
                 alert('Sie wurden erfolgreich ausgeloggt!');
-                window.location.href = newUrl; // Weiterleitung zur Startseite
+                window.location.href = '/';
             } else {
                 alert('Sie sind bereits ausgeloggt.');
             }
