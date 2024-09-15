@@ -10,12 +10,24 @@ class DataService {
         if (!this.cache.equipment) {
             //read equipment.json and put in cache
             console.log('loading equipment from db')
-            this.cache.equipment = {
-                "id":"xyz123",
-                "name":"Gerät",
-                "available":true,
-                "reservedByMe":false
-            }
+            this.cache.equipment = [{
+                id:"xyz123",
+                name:"Gerät",
+                available:true,
+                reservedByMe:false
+            },
+            {
+                id:"xyz456",
+                name:"Anderes Gerät",
+                available:false,
+                reservedByMe:true
+            },
+            {
+                id:"xyz789",
+                name:"Tolles Gerät",
+                available:false,
+                reservedByMe:false
+            }]
         }
         return this.cache.equipment;
     }

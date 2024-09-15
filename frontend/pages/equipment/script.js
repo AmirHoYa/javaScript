@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('readystatechange', event => { 
 
+  // When DOM is loading
+  if (event.target.readyState === "loading") {
+  }
+
   // When HTML/DOM elements are ready:
   if (event.target.readyState === "interactive") {   //does same as:  ..addEventListener("DOMContentLoaded"..
       init();
@@ -29,7 +33,7 @@ document.addEventListener('readystatechange', event => {
 
 function init() {
   //Open tab on load
-  document.getElementById('equipment-tab').style.display = "block";
+  openTab(null, 'equipment-tab');
 }
 
 function openTab(evt, tabName) {
@@ -49,26 +53,63 @@ function openTab(evt, tabName) {
   }
 
   // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " active";
-  loadInfo(tabName)
+  var tab = document.getElementById(tabName);
+  tab.style.display = "block"
+  if (evt) {
+    evt.currentTarget.className += " active";
+  } else {
+    document.getElementById('equipment-button').className += " active";
+  }
+
+  if (!tab.hasAttribute('loaded')) {
+    loadInfo(tab)
+  }
 } 
 
 function loadInfo(tab) {
-  fetch(`/manage-equipment/${tab}`, {
+  fetch(`/manage-equipment/${tab.id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
   })
   .then(response => {
-    var json = response.json();
+    if (!response.ok) {
+      throw new Error('Netzwerkantwort war nicht ok.');
+    }
+    return response.json();
+  })
+  .then(json => {
     console.log(json);
-    applyInfo(json);
+    applyInfo(tab, json);
   })
   .catch(error => console.error('Error:', error));
 };
 
-function applyInfo(info) {
-  
+function applyInfo(tab, infos) {
+  const elPersonalGrid = document.querySelector('#personal .grid');
+  const elAllGrid = document.querySelector('#all .grid');
+  infos.forEach(item => {
+    const panel = document.createElement('div');
+    var className = 'panel';
+    if (item.reservedByMe) {
+      className += ' personal';
+    } else if (!item.available) {
+      className += ' reserved';
+    }
+
+    panel.className = className;
+    panel.onclick = () => {alert('hi')};
+    panel.innerHTML = `
+      <h2>${item.name}</h2>
+    `;
+    
+    elAllGrid.appendChild(panel);
+
+    if (item.reservedByMe) {
+      elPersonalGrid.appendChild(panel.cloneNode(true));
+    }
+  });
+
+  tab.setAttribute('loaded', true)
 }
