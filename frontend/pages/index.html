@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link rel="icon" href="" type="image/x-icon" class="logo">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="global-styles.css">
 </head>
 <body>
 
@@ -16,10 +16,13 @@
             <div class="nav-container">
                 <ul>
                     <li><a href="/login">Login</a></li>
-                    <li><a href="/trainingdata.html?loggedIn=true&email=test%40user.de">Meine Trainingsdaten</a></li>
+                    <li><a id="trainingDataLink" href="#">Meine Trainingsdaten</a></li>
                     <li><a href="">Trainingsplan</a></li>
                     <li><a href="">Angebote</a></li>
                     <li><a href="">Blabla</a></li>
+                    <li>
+                        <button id="logoutBtn" class="logout-btn">Logout</button>
+                    </li>
                 </ul>
             </div>
         </nav>

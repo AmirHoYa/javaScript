@@ -57,9 +57,8 @@ h1 {
 }
 
 #trainerImage {
-    width: 200px;
-    height: auto;
-    border-radius: 8px;
+    width: 100px; /* Stelle sicher, dass das Bild nicht zu klein ist */
+    height: auto; /* Erhält das Seitenverhältnis bei Größenänderungen */
 }
 
 #saveAsPdfButton {

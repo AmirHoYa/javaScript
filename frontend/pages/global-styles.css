@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
@@ -9,6 +9,7 @@ header {
     flex-direction: row;
     width: 100%;
     border-bottom: 1px solid #eeeeee;
+    position: relative;
 }
 
 header div {
@@ -55,4 +56,27 @@ nav a.active {
 
 nav a:hover {
     border-bottom: 3px solid #8000ff;
+}
+
+.logout-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ff4b5c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #ff0000;
+}
+
+.logout-btn:focus {
+    outline: none;
 }
