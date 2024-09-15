@@ -3,9 +3,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 
+app.use('/assets', express.static(path.join(__dirname, '..', 'frontend', 'assets')));
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages')));
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages', 'trainingdata')));
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'assets')));
 app.use(bodyParser.json());
 
 const trainingData = {
@@ -35,6 +35,7 @@ const users = {
         name: "Test User",
         gender: "male",
         age: 21,
+        trainer: ""
     },
     "another@user.com": {
         password: "password456",
@@ -71,8 +72,7 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/trainingdata', (req, res) => {
-    const { email } = req.query;
-    
+    const { email } = req.query;    
     const data = trainingData[email] || [];
     const trainer = users[email].trainer;
 
@@ -80,6 +80,10 @@ app.get('/trainingdata', (req, res) => {
         trainingData: data,
         trainer: trainer
     });
+});
+
+app.get('/test-image', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'assets', 'arnold.webp'));
 });
 
 const port = 3000;

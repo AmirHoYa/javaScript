@@ -51,16 +51,19 @@ h1 {
     text-align: center;
 }
 
+/* Container für Bilder */
 #trainerInfo {
-    margin-top: 20px;
     text-align: center;
 }
 
+/* Stil für das Trainerbild */
 #trainerImage {
-    width: 100px; /* Stelle sicher, dass das Bild nicht zu klein ist */
-    height: auto; /* Erhält das Seitenverhältnis bei Größenänderungen */
+    width: 200px; /* Feste Breite */
+    height: 200px; /* Feste Höhe */
+    object-fit: cover; /* Bild in den Container anpassen */
+    border-radius: 10px; /* Abgerundete Ecken (optional) */
+    border: 2px solid #ddd; /* Rand um das Bild (optional) */
 }
-
 #saveAsPdfButton {
     margin-top: 10px;
     padding: 10px 20px;

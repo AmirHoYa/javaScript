@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const trainerImage = document.getElementById('trainerImage');
             const trainerNameElement = document.getElementById('trainerName');
-
+            console.log("Test: " + trainerInfo[trainer]);
             if (trainerInfo[trainer]) {
                 trainerImage.src = trainerInfo[trainer];
                 trainerImage.alt = trainer;
