@@ -1,0 +1,78 @@
+.tab-button {
+    height: 60px;
+    width: 50%;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    border: 1px solid #eeeeee;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-button.active {
+    background-color: #eeeeee;
+}
+
+.tab-button:hover {
+    background-color: #dddddd;
+}
+
+.tab-content {
+    display: none;
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #eeeeee;
+    border-top: none;
+}
+
+.tab-content>div {
+    width: 100%;
+}
+
+.tab-content h3 {
+    padding: 0 1%;
+    width: 98%;
+    border-bottom: 2px solid #eeeeee;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.panel {
+    height: 230px;
+    width: 230px;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 7px #ccc;
+    display: block;
+}
+
+#tab-conatiner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    box-shadow: 5px 5px 7px #ccc;
+    border-radius: 10px;
+}
+
+#tabs {
+    display: flex;
+}
+
+#personal {
+    height: fit-content;
+}
+
+#equipment-tab {
+}
+
+#course-tab {
+}
+
+
+

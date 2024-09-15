@@ -1,0 +1,6 @@
+{
+    "id":"xyz123",
+    "name":"Gerät",
+    "available":true,
+    "reservedByMe":false
+}

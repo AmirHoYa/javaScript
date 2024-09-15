@@ -4,7 +4,7 @@
 }
 
 header {
-    height: 100px;
+    height: 80px;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -12,12 +12,9 @@ header {
     position: relative;
 }
 
-header div {
-}
-
 header h1 {
-    line-height: 100px;
-    font-size: 70px;
+    line-height: 80px;
+    font-size: 50px;
     width: fit-content;
 }
 
@@ -43,7 +40,7 @@ nav a {
     display: block;
     text-align: center;
     font-size: 24px;
-    line-height: 97px;
+    line-height: 77px;
     padding: 0 16px;
     text-decoration: none;
     color: #333333;

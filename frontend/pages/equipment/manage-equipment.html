@@ -2,29 +2,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geräte Übersicht</title>
+    <title>Geräte/Kurse</title>
 
     <link rel="stylesheet" href="../global-styles.css">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div id="wrapper">
         <header>
             <a href=""><h1>Header</h1></a>
-            <h1 id="page-title">Geräte Übersicht</h1>
+            <h1 id="page-title">Geräte/Kurs Übersicht</h1>
             <nav>
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html?loggedIn=true">Home</a></li>
                     <li><a href="">Trainingsplan</a></li>
-                    <li><a class="active" href="">Geräte</a></li>
+                    <li><a class="active" href="">Geräte/Kurse</a></li>
                     <li><a href="">Meine Statistik</a></li>
                 </ul>
             </nav>
         </header>
 
-        <div id="content">
+        <main>
             Content
-        </div>
+
+            <div id="tab-conatiner">
+                <div id="tabs">
+                    <button onclick="openTab(event, 'equipment-tab')" class="tab-button active" id="equipment-button">Geräte</button>
+                    <button onclick="openTab(event, 'course-tab')" class="tab-button" id="course-button">Kurse</button>
+                </div>
+                <div id="filter">
+
+                </div>
+                <div id="tab-content-wrapper">
+                    <div class="tab-content" id="equipment-tab">
+                        <div id="personal">
+                            <h3>Von mir reserviert</h3>
+                            <div class="grid">
+                                <div class="panel personal">1</div>
+                                <div class="panel personal">2</div>
+                                <div class="panel personal">3</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="course-tab">
+                        courses
+                    </div>
+                </div>
+            </div>
+        </main>
 
         <footer>
             Footer

@@ -3,6 +3,40 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 
+class DataService {
+    cache = {};
+
+    loadEquipment() {
+        if (!this.cache.equipment) {
+            //read equipment.json and put in cache
+            console.log('loading equipment from db')
+            this.cache.equipment = {
+                "id":"xyz123",
+                "name":"Gerät",
+                "available":true,
+                "reservedByMe":false
+            }
+        }
+        return this.cache.equipment;
+    }
+
+    saveEquipment(equipment) {
+        this.cache.equipment = equipment;
+    }
+    
+    loadCourses() {
+        if (!this.cache.courses) {
+            //read courses.json and put in cache
+        }
+        return this.cache.courses;
+    }
+
+    saveCourses(courses) {
+        this.cache.courses = courses;
+    }
+}
+const dataService = new DataService();
+
 app.use('/assets', express.static(path.join(__dirname, '..', 'frontend', 'assets')));
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages')));
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages', 'trainingdata')));
@@ -86,7 +120,14 @@ app.get('/test-image', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'assets', 'arnold.webp'));
 });
 
+app.get('/manage-equipment/equipment-tab', (req, res) => {
+    res.send(dataService.loadEquipment());
+    // console.log(dataService.loadEquipment());
+})
+
 const port = 3000;
 app.listen(port, () => {
     console.log(`Server läuft auf http://localhost:${port}`);
 });
+
+
