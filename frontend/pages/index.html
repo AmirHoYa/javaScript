@@ -8,6 +8,7 @@
     <meta name="keywords" content="">
     <link rel="icon" href="" type="image/x-icon" class="logo">
     <link rel="stylesheet" href="global-styles.css">
+    <script src="dynamicLinks.js"></script>
 </head>
 <body>
     <header>
@@ -15,13 +16,11 @@
         <h1 id="page-title">Mein Kundenportal</h1>
         <nav>
             <ul>
-                <li><a class="active" href="">Home</a></li>
-                <li><a href="">Trainingsplan</a></li>
-                <li><a href="equipment/manage-equipment.html">Geräte/Kurse</a></li>
+                <li><a class="navLink active"  href="/home">Home</a></li>
+                <li><a class="navLink" href="/equipment">Geräte/Kurse</a></li>
+                <li><a class="navLink restricted" href="/trainingdata">Trainingsplan</a></li>
                 <li id="login"><a href="/login">Login</a></li>
-                <li>
-                    <button id="logoutBtn" class="logout-btn">Logout</button>
-                </li>
+                <li id="logout"><a href="/logout">Logout</a></li>
             </ul>
         </nav>
     </header>

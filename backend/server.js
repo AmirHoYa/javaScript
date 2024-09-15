@@ -105,7 +105,23 @@ app.post('/login', (req, res) => {
     }
 });
 
+app.get('/logout', (req, res) => {
+    res.redirect('/home');
+});
+
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'index.html'));
+});
+
 app.get('/trainingdata', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'trainingdata', 'trainingdata.html'));
+});
+
+app.get('/equipment', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'equipment', 'manage-equipment.html'));
+});
+
+app.get('/trainingdata/info', (req, res) => {
     const { email } = req.query;    
     const data = trainingData[email] || [];
     const trainer = users[email].trainer;

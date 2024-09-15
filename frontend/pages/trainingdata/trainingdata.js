@@ -3,15 +3,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const loggedIn = urlParams.get('loggedIn') === 'true';
     const email = urlParams.get('email');
 
-    // Sicherstellen, dass der Benutzer eingeloggt ist und eine gültige E-Mail hat
-    if (!loggedIn || !email) {
-        alert('Diese Funktion ist nur mit einem Login zugänglich!');
-        window.location.href = '/login';
-        return;
+    // Hide "Login" or "Logout" link
+    var login = document.getElementById('login');
+    var logout = document.getElementById('logout');
+    if (loggedIn) {
+        login.style.display = 'none';
+        logout.style.display = 'block';
+    } else {
+        login.style.display = 'block';
+        logout.style.display = 'none';
     }
 
     // Trainingsdaten und Trainer-Daten abrufen und in die Tabelle einfügen
-    fetch(`/trainingdata?loggedIn=${loggedIn}&email=${encodeURIComponent(email)}`)
+    fetch(`/trainingdata/info?loggedIn=${loggedIn}&email=${encodeURIComponent(email)}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Netzwerkantwort war nicht ok.');
@@ -68,17 +72,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
-    // Link-Aktualisierung für Navigation (falls erforderlich)
-    function updateLinks() {
-        const links = document.querySelectorAll('nav a');
-        links.forEach(link => {
-            const href = new URL(link.href);
-            href.searchParams.set('loggedIn', loggedIn);
-            href.searchParams.set('email', email);
-            link.href = href.toString();
-        });
-    }
-
-    updateLinks();
 });
