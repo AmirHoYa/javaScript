@@ -144,9 +144,12 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { loginEmail, password } = req.body;
+    const redirectPath = req.query.redirectFrom;
+    console.log(req);
+    console.log(redirectPath);
 
     if (users[loginEmail] && users[loginEmail].password === password) {
-        res.redirect(`/home?loggedIn=true&email=` + encodeURIComponent(loginEmail));
+        res.redirect(`${redirectPath ? redirectPath : '/home'}?loggedIn=true&email=` + encodeURIComponent(loginEmail));
     } else {
         res.send('Login fehlgeschlagen! Ungültige E-Mail oder Passwort.');
     }
