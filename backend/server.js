@@ -49,6 +49,11 @@ class DataService {
 }
 const dataService = new DataService();
 
+// IMPORTANT: configured before static path to prevent loading index.html directly instead of using the configured routing!
+app.all('/', (req, res) => {
+    redirectWithParams(req, res, '/home');
+});
+
 app.use('/assets', express.static(path.join(__dirname, '..', 'frontend', 'assets')));
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages')));
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'pages', 'trainingdata')));
@@ -99,9 +104,39 @@ const users = {
     }
 };
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'index.html'));
-});
+/*
+    ===== Request body (relevant data): =====
+    IncomingMessage {
+        headers: {
+            host: 'localhost:3000'
+            referer: 'http://localhost:3000/<path> (previous page from history, where this page was called from) >> can be used to auto redirect to calling page after login, instead of /home
+        }
+        host: 'localhost'
+        hostname: 'localhost'
+        method: 'GET'
+        originalUrl: <url> (url that was used to call this page, includes params)
+        path: <path> (url path after domain)
+        query: {
+            <key>: <value> (params; ex: loggedIn: 'true') // <value> is always a string, so "loggedIn === true" -> false //
+        }
+    }
+*/
+function redirectWithParams(req, res, path) {
+    var params = req.query;
+    var firstParam = true;
+    var url = path;
+
+    if (params) {
+        for (const key in params) {
+            var param = firstParam ? '?' : '&';
+            param += `${key}=${params[key]}`;
+            url += param;
+            firstParam = false;
+        }
+    }
+
+    res.redirect(url);
+}
 
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'login', 'login.html'));
@@ -111,7 +146,7 @@ app.post('/login', (req, res) => {
     const { loginEmail, password } = req.body;
 
     if (users[loginEmail] && users[loginEmail].password === password) {
-        res.redirect('/index.html?loggedIn=true&email=' + encodeURIComponent(loginEmail));
+        res.redirect(`/home?loggedIn=true&email=` + encodeURIComponent(loginEmail));
     } else {
         res.send('Login fehlgeschlagen! Ungültige E-Mail oder Passwort.');
     }
@@ -157,5 +192,3 @@ const port = 3000;
 app.listen(port, () => {
     console.log(`Server läuft auf http://localhost:${port}`);
 });
-
-
