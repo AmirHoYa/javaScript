@@ -34,22 +34,37 @@
     </section>
 
     <!-- Karten -->
-    <div class="card-container">
-        <div class="card">
-            <img src="../assets/trainingsplan.webp" alt="trainingsplan">
-            <h3>Mein Trainingsplan</h3>
-        </div>
-        <div class="card">
-            <img src="../assets/trainingsdaten.webp" alt="trainingsdaten">
-            <h3>Meine Trainingsdaten</h3>
-        </div>
-        <div class="card">
-            <img src="../assets/statistics.png" alt="statistiken">
-            <h3>Statistiken</h3>
-        </div>
-        <div class="card">
+    <div id="card-container">
+        <div id="equipment" class="card active" onclick="openInfo('equipment-info')">
             <img src="../assets/geraete.jpg" alt="Geräte Übersicht Icon">
-            <h3>Geräte Übersicht</h3>
+            <h3>Geräte</h3>
+        </div>
+        <div id="courses" class="card" onclick="openInfo('courses-info')">
+            <img src="../assets/courses_logo.jpg" alt="statistiken">
+            <h3>Kurse</h3>
+        </div>
+        <div id="trainigdata" class="card" onclick="openInfo('trainigdata-info')">
+            <img src="../assets/trainingsdaten.webp" alt="trainingsdaten">
+            <h3>Trainingsdaten</h3>
+        </div>
+        <div id="exerciseplan" class="card" onclick="openInfo('exerciseplan-info')">
+            <img src="../assets/trainingsplan.webp" alt="trainingsplan">
+            <h3>Trainingsplan</h3>
+        </div>
+    </div>
+    <hr class="seperator"/>
+    <div id="info-container">
+        <div id="equipment-info" class="info active">
+            <p>equipment lorem ipsum</p>
+        </div>
+        <div id="courses-info" class="info">
+            <p>courses lorem ipsum</p>
+        </div>
+        <div id="trainigdata-info" class="info">
+            <p>trainigdata lorem ipsum</p>
+        </div>
+        <div id="exerciseplan-info" class="info">
+            <p>exerciseplan lorem ipsum</p>
         </div>
     </div>
 

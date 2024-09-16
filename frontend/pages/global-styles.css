@@ -74,3 +74,9 @@ nav a:hover,nav p:hover {
 .logout-btn:focus {
     outline: none;
 }
+
+.seperator {
+    clear: both;
+    margin: 1.5em auto;
+    width: 97%;
+}

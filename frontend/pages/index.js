@@ -41,3 +41,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+function openInfo(infoId) {
+    // Declare all variables
+    var i, info, card;
+
+    // Get all elements with class="info" and hide them
+    info = document.getElementsByClassName("info");
+    for (i = 0; i < info.length; i++) {
+        info[i].style.display = "none";
+    }
+
+    // Get all elements with class="card" and remove the class "active"
+    card = document.getElementsByClassName("card");
+    for (i = 0; i < card.length; i++) {
+        card[i].className = card[i].className.replace(" active", "");
+    }
+
+    // Show the current info, and add an "active" class to the card that opened the info
+    var activeInfo = document.getElementById(infoId);
+    activeInfo.style.display = "block"
+    event.currentTarget.className += " active";
+}
