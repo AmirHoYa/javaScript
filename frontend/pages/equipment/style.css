@@ -65,6 +65,18 @@
     box-shadow: inset 0 0 5000px -70px gray;
 }
 
+span.many {
+    color: green;
+}
+
+span.few {
+    color: orange;
+}
+
+span.none {
+    color: red;
+}
+
 #tab-conatiner {
     margin-left: auto;
     margin-right: auto;

@@ -1,3 +1,6 @@
+const urlParams = new URLSearchParams(window.location.search);
+const email = urlParams.get('email');
+
 document.addEventListener('DOMContentLoaded', function() {
   const urlParams = new URLSearchParams(window.location.search);
   const loggedIn = urlParams.get('loggedIn') === 'true';
@@ -67,7 +70,7 @@ function openTab(evt, tabName) {
 } 
 
 function loadInfo(tab) {
-  fetch(`/manage-equipment/${tab.id}`, {
+  fetch(`/manage-equipment/${tab.id}/${email}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -87,30 +90,23 @@ function loadInfo(tab) {
 };
 
 function applyInfo(tab, infos) {
-  const urlParams = new URLSearchParams(window.location.search);
-  const email = urlParams.get('email');
   if (!email) {
-    document.getElementById('personal').style.display = 'none';
+    document.querySelector(`#${tab.id} #personal`).style.display = 'none';
   }
 
-  const elPersonalGrid = document.querySelector('#personal .grid');
-  const elAllGrid = document.querySelector('#all .grid');
+  const elPersonalGrid = document.querySelector(`#${tab.id} #personal .grid`);
+  const elAllGrid = document.querySelector(`#${tab.id} #all .grid`);
   infos.forEach(item => {
-    const panel = document.createElement('div');
     var className = 'panel';
-    if (email && item.reservedBy === email) {
+    if (item.reservedByMe) {
       className += ' personal';
-      item.reservedByMe = true;
-    } else if (item.reservedBy) {
+    } else if (!item.available) {
       className += ' reserved';
     }
 
-    panel.className = className;
-    panel.onclick = () => {alert('hi')};
-    panel.innerHTML = `
-      <h2>${item.name}</h2>
-    `;
-    
+    var panel;
+    if (tab.id === 'equipment-tab') {panel = buildEquipmentPanel(className, item)}
+    if (tab.id === 'course-tab') {panel = buildCoursePanel(className, item)}
     elAllGrid.appendChild(panel);
 
     if (item.reservedByMe) {
@@ -119,4 +115,29 @@ function applyInfo(tab, infos) {
   });
 
   tab.setAttribute('loaded', true)
+}
+
+function buildEquipmentPanel(className, info) {
+  const panel = document.createElement('div');
+  panel.className = className;
+  panel.onclick = () => {alert('hi')};
+  panel.innerHTML = `
+    <h2>${info.name}</h2>
+  `;
+  return panel;
+}
+
+function buildCoursePanel(className, info) {
+  var spanClass = 'many';
+  if (info.freeSlots < 3) {spanClass = 'few'}
+  if (info.freeSlots == 0) {spanClass = 'none'}
+
+  const panel = document.createElement('div');
+  panel.className = className;
+  panel.onclick = () => {alert('hi')};
+  panel.innerHTML = `
+    <h2>${info.name}</h2>
+    <p>Freie Plätze: <span class="${spanClass}">${info.freeSlots}</span></p>
+  `;
+  return panel;
 }

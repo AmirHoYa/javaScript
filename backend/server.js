@@ -36,6 +36,37 @@ class DataService {
     loadCourses() {
         if (!this.cache.courses) {
             //read courses.json and put in cache
+            console.log('loading courses from db')
+            this.cache.courses = [{
+                id:"c123",
+                name:"Wassergymnastik",
+                capacity: 4,
+                reservedBy:[]
+            },
+            {
+                id:"c456",
+                name:"Zumba",
+                capacity: 4,
+                reservedBy:["test@user.de"]
+            },
+            {
+                id:"c789",
+                name:"Aerobik",
+                capacity: 4,
+                reservedBy:["another@user.com", "third@user.com"]
+            },
+            {
+                id:"c789",
+                name:"Personal",
+                capacity: 1,
+                reservedBy:["another@user.com"]
+            },
+            {
+                id:"c723",
+                name:"Personal 2",
+                capacity: 1,
+                reservedBy:["test@user.de"]
+            }]
         }
         return this.cache.courses;
     }
@@ -181,8 +212,49 @@ app.get('/test-image', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'assets', 'arnold.webp'));
 });
 
-app.get('/manage-equipment/equipment-tab', (req, res) => {
-    res.send(dataService.loadEquipment());
+/*
+    response json:
+    {
+        name: string,
+        available: boolean,
+        reservedByMe: boolean,
+        (freeSlots: int) //courses only
+    }
+ */
+app.get('/manage-equipment/equipment-tab/:email', (req, res) => {
+    var equipment = dataService.loadEquipment();
+    var response = [];
+    equipment.forEach(element => {
+        var reserved = element.reservedBy ? true : false;
+        var reservedByMe = req.params.email && element.reservedBy === req.params.email;
+        response.push({
+            name: element.name,
+            available: !reserved,
+            reservedByMe: reservedByMe
+        })
+    });
+
+    res.send(response);
+})
+
+app.get('/manage-equipment/course-tab/:email', (req, res) => {
+    var courses = dataService.loadCourses();
+    var response = [];
+    courses.forEach(element => {
+        var reservedByMe = req.params.email && element.reservedBy.includes(req.params.email);
+        var freeSlots = element.capacity - element.reservedBy.length;
+        var available = freeSlots > 0 || reservedByMe;
+        console.log(freeSlots)
+        response.push({
+            name: element.name,
+            available: available,
+            reservedByMe: reservedByMe,
+            freeSlots: freeSlots
+        })
+    });
+
+    console.log(response)
+    res.send(response);
 })
 
 app.get('/user/:email', (req, res) => {
