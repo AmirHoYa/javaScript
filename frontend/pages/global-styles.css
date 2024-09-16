@@ -21,6 +21,7 @@ header h1 {
 h1#page-title {
     margin-left: auto;
     margin-right: auto;
+    overflow: hidden;
 }
 
 nav {

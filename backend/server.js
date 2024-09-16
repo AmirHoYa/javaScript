@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
+const fs = require('fs');
 
 class DataService {
     cache = {};
@@ -10,7 +11,9 @@ class DataService {
         if (!this.cache.equipment) {
             //read equipment.json and put in cache
             console.log('loading equipment from db')
-            this.cache.equipment = {
+            let equipmentData = fs.readFileSync('backend/database/equipment.json');
+            this.cache.equipment = JSON.parse(equipmentData);
+            /* this.cache.equipment = {
             "g1":{
                 id:"g1",
                 name:"Gerät",
@@ -25,7 +28,7 @@ class DataService {
                 id:"g3",
                 name:"Tolles Gerät",
                 reservedBy:"another@user.com"
-            }}
+            }} */
         }
         return this.cache.equipment;
     }
@@ -238,6 +241,7 @@ app.get('/manage-equipment/equipment-tab/:email', (req, res) => {
         response.push({
             id: element.id,
             name: element.name,
+            img: element.img,
             available: !reserved,
             reservedByMe: reservedByMe
         })
@@ -257,6 +261,7 @@ app.get('/manage-equipment/course-tab/:email', (req, res) => {
         response.push({
             id: element.id,
             name: element.name,
+            img: element.img,
             available: available,
             reservedByMe: reservedByMe,
             freeSlots: freeSlots
@@ -278,6 +283,7 @@ app.get('/manage-equipment/:id/:email', (req, res) => {
         res.json({
             id: element.id,
             name: element.name,
+            img: element.img,
             available: !reserved,
             reservedByMe: reservedByMe
         })
@@ -288,6 +294,7 @@ app.get('/manage-equipment/:id/:email', (req, res) => {
         res.json({
             id: element.id,
             name: element.name,
+            img: element.img,
             available: available,
             reservedByMe: reservedByMe,
             freeSlots: freeSlots

@@ -121,6 +121,8 @@ function buildEquipmentPanel(className, info) {
   const panel = document.createElement('div');
   panel.className = className;
   panel.id = info.id;
+  console.log(info.img);
+  if (info.img) {panel.style.backgroundImage = `url(${info.img}), url(/assets/missing_image.jpg)`};
   panel.onclick = () => {details(info.id)};
   panel.innerHTML = `
     <h2>${info.name}</h2>
@@ -173,19 +175,28 @@ function applyDetails(data) {
     unsub: `<button id="unsubscribe" onclick="unsubscribe('${data.id}')">${isEquipment ? 'Stornieren' : 'Abmelden'}</button>`
   }
   details.id = data.id;
+  details.className = 'details';
   details.innerHTML = `
-    <img src="/assets/courses_logo.jpg" width="100" height="100" alt="">
+    <img src="${data.img}" width="200" height="200" alt="">
     <hr id="separator">
     <div id="detail-info">
         <h2 id="name">${data.name}</h2>
         <p id="description"></p>
     </div>
     ${data.reservedByMe ? buttons.unsub : data.available ? buttons.sub_available : buttons.sub_unavailable}
+    <button id="close" onclick="closeDetails()">X</button>
   `;
 
   const selected = document.getElementById('selected');
-  selected.replaceChild(details, selected.firstChild)
+  if (selected.hasChildNodes()) {selected.removeChild(selected.firstChild);}
+  selected.appendChild(details)
   selected.style.display = 'block';
+}
+
+function closeDetails() {
+  const selected = document.getElementById('selected');
+  selected.removeChild(selected.firstChild);
+  selected.style.display = 'none';
 }
 
 function subscribe(panelId) {
