@@ -208,10 +208,6 @@ app.get('/trainingdata/info', (req, res) => {
     });
 });
 
-app.get('/test-image', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'frontend', 'assets', 'arnold.webp'));
-});
-
 /*
     response json:
     {
