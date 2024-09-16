@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${item.exercise}</td>
                     <td>${item.duration}</td>
                     <td>${item.calories}</td>
+                    <td>${item.repetitions}</td>
+                    <td>${item.sets}</td>
+                    <td>${item.weight}</td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -52,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 trainerImage.src = '../../assets/default_trainer.jpg';
                 trainerImage.alt = 'Trainer Bild';
-                trainerNameElement.textContent = 'Unbekannter Trainer';
+                trainerNameElement.textContent = 'Trainer';
             }
         })
         .catch(error => {

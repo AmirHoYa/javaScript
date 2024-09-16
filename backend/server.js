@@ -61,22 +61,22 @@ app.use(bodyParser.json());
 
 const trainingData = {
     "test@user.de": [
-        { date: '2024-09-01', exercise: 'Laufband', duration: '30 Minuten', calories: 300 },
-        { date: '2024-09-05', exercise: 'Fahrrad', duration: '45 Minuten', calories: 400 },
-        { date: '2024-09-10', exercise: 'Rudergerät', duration: '20 Minuten', calories: 250 },
-        { date: '2024-09-15', exercise: 'Krafttraining', duration: '60 Minuten', calories: 500 }
+        { date: '2024-09-01', exercise: 'Laufband', duration: '30 Minuten', calories: 300, repetitions: '-', sets: '-', weight: '-'},
+        { date: '2024-09-05', exercise: 'Fahrrad', duration: '45 Minuten', calories: 400, repetitions: '-', sets: '-', weight: '-' },
+        { date: '2024-09-10', exercise: 'Rudern', duration: '20 Minuten', calories: 250, repetitions: '10', sets: '3', weight: '50 kg' },
+        { date: '2024-09-15', exercise: 'Beinpresse', duration: '60 Minuten', calories: 500, repetitions: '5', sets: '5', weight: '100 kg'}
     ],
     "another@user.com": [
-        { date: '2024-09-02', exercise: 'Stepper', duration: '40 Minuten', calories: 350 },
-        { date: '2024-09-06', exercise: 'Ellipsentrainer', duration: '50 Minuten', calories: 420 },
-        { date: '2024-09-12', exercise: 'Boxen', duration: '30 Minuten', calories: 400 },
-        { date: '2024-09-18', exercise: 'Yoga', duration: '45 Minuten', calories: 200 }
+        { date: '2024-09-02', exercise: 'Stepper', duration: '40 Minuten', calories: 350, repetitions: '-', sets: '-', weight: '-' },
+        { date: '2024-09-06', exercise: 'Ellipsentrainer', duration: '50 Minuten', calories: 420, repetitions: '-', sets: '-', weight: '-' },
+        { date: '2024-09-12', exercise: 'Latissimuszug', duration: '30 Minuten', calories: 400, repetitions: '8', sets: '2', weight: '20 kg' },
+        { date: '2024-09-18', exercise: 'Brustpresse', duration: '45 Minuten', calories: 200, repetitions: '10', sets: '3', weight: '25 kg' }
     ],
     "third@user.com": [
-        { date: '2024-09-03', exercise: 'Krafttraining', duration: '45 Minuten', calories: 450 },
-        { date: '2024-09-07', exercise: 'Schwimmen', duration: '30 Minuten', calories: 350 },
-        { date: '2024-09-13', exercise: 'Laufband', duration: '40 Minuten', calories: 400 },
-        { date: '2024-09-20', exercise: 'Fahrrad', duration: '60 Minuten', calories: 500 }
+        { date: '2024-09-03', exercise: 'Schulterpresse', duration: '45 Minuten', calories: 450, repetitions: '5', sets: '4', weight: '30 kg' },
+        { date: '2024-09-07', exercise: 'Beinbeuger/-strecker', duration: '30 Minuten', calories: 350, repetitions: '10', sets: '3', weight: '40 kg' },
+        { date: '2024-09-13', exercise: 'Laufband', duration: '40 Minuten', calories: 400, repetitions: '-', sets: '-', weight: '-' },
+        { date: '2024-09-20', exercise: 'Fahrrad', duration: '60 Minuten', calories: 500, repetitions: '-', sets: '-', weight: '-' }
     ]
 };
 
@@ -86,7 +86,7 @@ const users = {
         name: "Test User",
         gender: "male",
         age: 21,
-        trainer: ""
+        trainer: "Markus Rühl"
     },
     "another@user.com": {
         password: "password456",
@@ -100,7 +100,7 @@ const users = {
         name: "Third User",
         gender: "non-binary",
         age: 25,
-        trainer: "Markus Rühl"
+        trainer: ""
     }
 };
 
