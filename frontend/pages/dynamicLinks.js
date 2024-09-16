@@ -6,10 +6,10 @@ document.addEventListener('click', (e) => {
         const isRestricted = e.target.classList.contains('restricted')
 
         console.log(e.target);
-        if (isRestricted && (!loggedIn || !email)) {
+        if (isRestricted && (!loggedIn || !email)) { // If function is login restricted and no user is logged in
             e.preventDefault(); // Prevent default link behavior
             alert('Diese Funktion ist nur mit einem Login zugänglich!');
-            location.href = '/login';
+            location.href = `/login?redirectFrom=${e.target.getAttribute('href')}`;
             return;
         }
 
