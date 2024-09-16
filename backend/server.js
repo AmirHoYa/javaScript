@@ -154,9 +154,11 @@ function redirectWithParams(req, res, path) {
     var params = req.query;
     var firstParam = true;
     var url = path;
+    const ignore = ["tab"];
 
     if (params) {
         for (const key in params) {
+            if (ignore.includes(key)) {continue}
             var param = firstParam ? '?' : '&';
             param += `${key}=${params[key]}`;
             url += param;
@@ -164,8 +166,16 @@ function redirectWithParams(req, res, path) {
         }
     }
 
+    console.log(url)
     res.redirect(url);
 }
+
+app.get('/redirect/:path', (req, res) => {
+    const path = '/' + req.params.path;
+    console.log(req);
+    console.log(path);
+    redirectWithParams(req, res, path);
+});
 
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'frontend', 'pages', 'login', 'login.html'));

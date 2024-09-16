@@ -21,7 +21,7 @@ document.addEventListener('click', (e) => {
         e.preventDefault(); // Prevent default link behavior
         // Replace the path of URL after the domain with the value from the a-tags href attribute (not the whole href, as that includes the domain).
         // This ensures it keeps any params the URL may contain.
-        var ref = e.target.getAttribute('href');
+        var ref = '/redirect' + e.target.getAttribute('href');
         location.pathname = ref;
     }
 

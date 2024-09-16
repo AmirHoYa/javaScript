@@ -1,5 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const email = urlParams.get('email');
+const activeTab = urlParams.get('tab') ? 'course' : 'equipment';
 
 document.addEventListener('DOMContentLoaded', function() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -35,11 +36,9 @@ document.addEventListener('readystatechange', event => {
 });
 
 function init() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const tab = urlParams.get('tab') ? 'course' : 'equipment';
 
   //Open tab on load
-  openTab(`${tab}-button`, `${tab}-tab`);
+  openTab(`${activeTab}-button`, `${activeTab}-tab`);
 }
 
 function openTab(buttonId, tabName) {
@@ -190,6 +189,11 @@ function applyDetails(data) {
 }
 
 function subscribe(panelId) {
+  if (!email) {
+    alert('Für diese Funktion müssen Sie eingeloggt sein!');
+    location.href = `/login?redirectFrom=/equipment`;
+    return;
+  }
   fetch(`/manage-equipment/sub/${panelId}/${email}`, {
     method: 'POST',
     headers: {
