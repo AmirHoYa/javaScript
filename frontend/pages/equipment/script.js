@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-document.addEventListener('readystatechange', event => { 
+document.addEventListener('readystatechange', event => {
 
   // When DOM is loading
   if (event.target.readyState === "loading") {
@@ -35,11 +35,14 @@ document.addEventListener('readystatechange', event => {
 });
 
 function init() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const tab = urlParams.get('tab') ? 'course' : 'equipment';
+
   //Open tab on load
-  openTab(null, 'equipment-tab');
+  openTab(`${tab}-button`, `${tab}-tab`);
 }
 
-function openTab(evt, tabName) {
+function openTab(buttonId, tabName) {
   // Declare all variables
   var i, tabcontent, tablinks;
 
@@ -58,11 +61,7 @@ function openTab(evt, tabName) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   var tab = document.getElementById(tabName);
   tab.style.display = "block"
-  if (evt) {
-    evt.currentTarget.className += " active";
-  } else {
-    document.getElementById('equipment-button').className += " active";
-  }
+  document.getElementById(buttonId).className += " active";
 
   if (!tab.hasAttribute('loaded')) {
     loadInfo(tab)
@@ -110,7 +109,9 @@ function applyInfo(tab, infos) {
     elAllGrid.appendChild(panel);
 
     if (item.reservedByMe) {
-      elPersonalGrid.appendChild(panel.cloneNode(true));
+      const clone = panel.cloneNode(true);
+      clone.onclick = () => {details(item.id)};
+      elPersonalGrid.appendChild(clone);
     }
   });
 
@@ -120,7 +121,8 @@ function applyInfo(tab, infos) {
 function buildEquipmentPanel(className, info) {
   const panel = document.createElement('div');
   panel.className = className;
-  panel.onclick = () => {alert('hi')};
+  panel.id = info.id;
+  panel.onclick = () => {details(info.id)};
   panel.innerHTML = `
     <h2>${info.name}</h2>
   `;
@@ -134,10 +136,87 @@ function buildCoursePanel(className, info) {
 
   const panel = document.createElement('div');
   panel.className = className;
-  panel.onclick = () => {alert('hi')};
+  panel.id = info.id;
+  panel.onclick = () => {details(info.id)};
   panel.innerHTML = `
     <h2>${info.name}</h2>
     <p>Freie Plätze: <span class="${spanClass}">${info.freeSlots}</span></p>
   `;
   return panel;
+}
+
+function details(panelId) {
+  fetch(`/manage-equipment/${panelId}/${email}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Netzwerkantwort war nicht ok.');
+    }
+    return response.json();
+  })
+  .then(json => {
+    console.log(json);
+    applyDetails(json);
+  })
+  .catch(error => console.error('Error:', error));
+}
+
+function applyDetails(data) {
+  const isEquipment = data.id.startsWith('g');
+  const details = document.createElement('div');
+  const buttons = {
+    sub_available: `<button id="subscribe" onclick="subscribe('${data.id}')">${isEquipment ? 'Reservieren' : 'Anmelden'}</button>`,
+    sub_unavailable: `<button class="disabled" id="subscribe" onclick="alert('${isEquipment ? 'Reservieren' : 'Anmelden'} nicht möglich!')">${isEquipment ? 'Reservieren' : 'Anmelden'}</button>`,
+    unsub: `<button id="unsubscribe" onclick="unsubscribe('${data.id}')">${isEquipment ? 'Stornieren' : 'Abmelden'}</button>`
+  }
+  details.id = data.id;
+  details.innerHTML = `
+    <img src="/assets/courses_logo.jpg" width="100" height="100" alt="">
+    <hr id="separator">
+    <div id="detail-info">
+        <h2 id="name">${data.name}</h2>
+        <p id="description"></p>
+    </div>
+    ${data.reservedByMe ? buttons.unsub : data.available ? buttons.sub_available : buttons.sub_unavailable}
+  `;
+
+  const selected = document.getElementById('selected');
+  selected.replaceChild(details, selected.firstChild)
+  selected.style.display = 'block';
+}
+
+function subscribe(panelId) {
+  fetch(`/manage-equipment/sub/${panelId}/${email}`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+  })
+  .then(response => {
+    if (response.redirected) {
+      window.location.href = response.url;
+    } else {
+      return response.text();
+    }
+  })
+}
+
+function unsubscribe(panelId) {
+  fetch(`/manage-equipment/unsub/${panelId}/${email}`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+  })
+  .then(response => {
+    if (response.redirected) {
+      window.location.href = response.url;
+    } else {
+      return response.text();
+    }
+  })
 }

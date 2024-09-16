@@ -30,10 +30,14 @@
         <main>
             Content
 
+            <div id="selected" style="display: none;">
+                <div id="details">
+                </div>
+            </div>
             <div id="tab-conatiner">
                 <div id="tabs">
-                    <button onclick="openTab(event, 'equipment-tab')" class="tab-button active" id="equipment-button">Geräte</button>
-                    <button onclick="openTab(event, 'course-tab')" class="tab-button" id="course-button">Kurse</button>
+                    <button onclick="openTab(this.id, 'equipment-tab')" class="tab-button active" id="equipment-button">Geräte</button>
+                    <button onclick="openTab(this.id, 'course-tab')" class="tab-button" id="course-button">Kurse</button>
                 </div>
                 <div id="filter">
 

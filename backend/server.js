@@ -10,21 +10,22 @@ class DataService {
         if (!this.cache.equipment) {
             //read equipment.json and put in cache
             console.log('loading equipment from db')
-            this.cache.equipment = [{
-                id:"xyz123",
+            this.cache.equipment = {
+            "g1":{
+                id:"g1",
                 name:"Gerät",
                 reservedBy:null
             },
-            {
-                id:"xyz456",
+            "g2":{
+                id:"g2",
                 name:"Anderes Gerät",
                 reservedBy:"test@user.de"
             },
-            {
-                id:"xyz789",
+            "g3":{
+                id:"g3",
                 name:"Tolles Gerät",
                 reservedBy:"another@user.com"
-            }]
+            }}
         }
         return this.cache.equipment;
     }
@@ -37,36 +38,36 @@ class DataService {
         if (!this.cache.courses) {
             //read courses.json and put in cache
             console.log('loading courses from db')
-            this.cache.courses = [{
-                id:"c123",
+            this.cache.courses = {"c1":{
+                id:"c1",
                 name:"Wassergymnastik",
                 capacity: 4,
                 reservedBy:[]
             },
-            {
-                id:"c456",
+            "c2":{
+                id:"c2",
                 name:"Zumba",
                 capacity: 4,
                 reservedBy:["test@user.de"]
             },
-            {
-                id:"c789",
+            "c3":{
+                id:"c3",
                 name:"Aerobik",
                 capacity: 4,
                 reservedBy:["another@user.com", "third@user.com"]
             },
-            {
-                id:"c789",
+            "c4":{
+                id:"c4",
                 name:"Personal",
                 capacity: 1,
                 reservedBy:["another@user.com"]
             },
-            {
-                id:"c723",
+            "c5":{
+                id:"c5",
                 name:"Personal 2",
                 capacity: 1,
                 reservedBy:["test@user.de"]
-            }]
+            }}
         }
         return this.cache.courses;
     }
@@ -220,15 +221,17 @@ app.get('/trainingdata/info', (req, res) => {
 app.get('/manage-equipment/equipment-tab/:email', (req, res) => {
     var equipment = dataService.loadEquipment();
     var response = [];
-    equipment.forEach(element => {
+    for (const key in equipment) {
+        const element = equipment[key];
         var reserved = element.reservedBy ? true : false;
         var reservedByMe = req.params.email && element.reservedBy === req.params.email;
         response.push({
+            id: element.id,
             name: element.name,
             available: !reserved,
             reservedByMe: reservedByMe
         })
-    });
+    }
 
     res.send(response);
 })
@@ -236,22 +239,98 @@ app.get('/manage-equipment/equipment-tab/:email', (req, res) => {
 app.get('/manage-equipment/course-tab/:email', (req, res) => {
     var courses = dataService.loadCourses();
     var response = [];
-    courses.forEach(element => {
+    for (const key in courses) {
+        const element = courses[key];
         var reservedByMe = req.params.email && element.reservedBy.includes(req.params.email);
         var freeSlots = element.capacity - element.reservedBy.length;
         var available = freeSlots > 0 || reservedByMe;
-        console.log(freeSlots)
         response.push({
+            id: element.id,
             name: element.name,
             available: available,
             reservedByMe: reservedByMe,
             freeSlots: freeSlots
         })
-    });
-
-    console.log(response)
+    }
+    
     res.send(response);
 })
+
+app.get('/manage-equipment/:id/:email', (req, res) => {
+    const id = req.params.id;
+    const email = req.params.email;
+    const isEquipment = id.startsWith('g');
+    const data = isEquipment ? dataService.loadEquipment() : dataService.loadCourses();
+    const element = data[id];
+    if (isEquipment) {
+        var reserved = element.reservedBy ? true : false;
+        var reservedByMe = req.params.email && element.reservedBy === req.params.email;
+        res.json({
+            id: element.id,
+            name: element.name,
+            available: !reserved,
+            reservedByMe: reservedByMe
+        })
+    } else {
+        var reservedByMe = req.params.email && element.reservedBy.includes(req.params.email);
+        var freeSlots = element.capacity - element.reservedBy.length;
+        var available = freeSlots > 0 || reservedByMe;
+        res.json({
+            id: element.id,
+            name: element.name,
+            available: available,
+            reservedByMe: reservedByMe,
+            freeSlots: freeSlots
+        });
+    }
+});
+
+app.post('/manage-equipment/sub/:id/:email', (req, res) => {
+    const id = req.params.id;
+    const isEquipment = id.startsWith('g');
+    const email = req.params.email;
+    const data = isEquipment ? dataService.loadEquipment() : dataService.loadCourses();
+    if (isEquipment) {
+        data[id].reservedBy = email;
+    } else {
+        data[id].reservedBy.push(email);
+    }
+
+    isEquipment ? dataService.saveEquipment(data) : dataService.saveCourses(data);
+
+    var url = req.headers.referer;
+    if (url.endsWith('tab=course')) {
+        url = url.substring(0, url.length -11);
+    }
+    if (!isEquipment) {   
+        url+= url.includes('?') ? '&tab=course' : '?tab=course';
+    }
+    res.redirect(url);
+});
+
+app.post('/manage-equipment/unsub/:id/:email', (req, res) => {
+    const id = req.params.id;
+    const isEquipment = id.startsWith('g');
+    const email = req.params.email;
+    const data = isEquipment ? dataService.loadEquipment() : dataService.loadCourses();
+    if (isEquipment) {
+        data[id].reservedBy = null;
+    } else {
+        var index = data[id].reservedBy.indexOf(email);
+        data[id].reservedBy.splice(index, 1)
+    }
+
+    isEquipment ? dataService.saveEquipment(data) : dataService.saveCourses(data);
+
+    var url = req.headers.referer;
+    if (url.endsWith('tab=course')) {
+        url = url.substring(0, url.length -11);
+    }
+    if (!isEquipment) {   
+        url+= url.includes('?') ? '&tab=course' : '?tab=course';
+    }
+    res.redirect(url);
+});
 
 app.get('/user/:email', (req, res) => {
     const email = req.params.email;
