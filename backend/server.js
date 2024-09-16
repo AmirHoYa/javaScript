@@ -188,7 +188,6 @@ app.get('/manage-equipment/equipment-tab', (req, res) => {
 app.get('/user/:email', (req, res) => {
     const email = req.params.email;
     const user = users[email];
-    console.log(user)
     
     if (!user) {
         res.status(204).send('User not found.');
