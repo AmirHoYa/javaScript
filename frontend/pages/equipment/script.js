@@ -87,14 +87,21 @@ function loadInfo(tab) {
 };
 
 function applyInfo(tab, infos) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const email = urlParams.get('email');
+  if (!email) {
+    document.getElementById('personal').style.display = 'none';
+  }
+
   const elPersonalGrid = document.querySelector('#personal .grid');
   const elAllGrid = document.querySelector('#all .grid');
   infos.forEach(item => {
     const panel = document.createElement('div');
     var className = 'panel';
-    if (item.reservedByMe) {
+    if (email && item.reservedBy === email) {
       className += ' personal';
-    } else if (!item.available) {
+      item.reservedByMe = true;
+    } else if (item.reservedBy) {
       className += ' reserved';
     }
 

@@ -13,20 +13,17 @@ class DataService {
             this.cache.equipment = [{
                 id:"xyz123",
                 name:"Gerät",
-                available:true,
-                reservedByMe:false
+                reservedBy:null
             },
             {
                 id:"xyz456",
                 name:"Anderes Gerät",
-                available:false,
-                reservedByMe:true
+                reservedBy:"test@user.de"
             },
             {
                 id:"xyz789",
                 name:"Tolles Gerät",
-                available:false,
-                reservedByMe:false
+                reservedBy:"another@user.com"
             }]
         }
         return this.cache.equipment;
@@ -145,8 +142,6 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     const { loginEmail, password } = req.body;
     const redirectPath = req.query.redirectFrom;
-    console.log(req);
-    console.log(redirectPath);
 
     if (users[loginEmail] && users[loginEmail].password === password) {
         res.redirect(`${redirectPath ? redirectPath : '/home'}?loggedIn=true&email=` + encodeURIComponent(loginEmail));
@@ -188,7 +183,19 @@ app.get('/test-image', (req, res) => {
 
 app.get('/manage-equipment/equipment-tab', (req, res) => {
     res.send(dataService.loadEquipment());
-    // console.log(dataService.loadEquipment());
+})
+
+app.get('/user/:email', (req, res) => {
+    const email = req.params.email;
+    const user = users[email];
+    console.log(user)
+    
+    if (!user) {
+        res.status(204).send('User not found.');
+        return;
+    }
+
+    res.json(user);
 })
 
 const port = 3000;
