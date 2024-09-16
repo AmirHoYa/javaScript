@@ -13,16 +13,22 @@ document.addEventListener('click', (e) => {
             return;
         }
 
-        if (isRestricted) {
+        if (isRestricted) { // Redirects to new url and keeps login info as params
             e.target.href = `${e.target.href}?loggedIn=true&email=${encodeURIComponent(email)}`
-        } else {
-            e.preventDefault(); // Prevent default link behavior
-            // Replace the path of URL after the domain with the value from the a-tags href attribute (not the whole href, as that includes the domain).
-            // This ensures it keeps any params the URL may contain.
-            var ref = e.target.getAttribute('href');
-            location.pathname = ref;
+            return;
         }
+
+        e.preventDefault(); // Prevent default link behavior
+        // Replace the path of URL after the domain with the value from the a-tags href attribute (not the whole href, as that includes the domain).
+        // This ensures it keeps any params the URL may contain.
+        var ref = e.target.getAttribute('href');
+        location.pathname = ref;
     }
+
+    if (e.target.parentElement.id === 'login') {
+        e.target.href += `?redirectFrom=${location.pathname}`;
+    }
+
 
     /*
     let target = e.target.closest('a');    
