@@ -2,3 +2,57 @@
     padding: 0;
     margin: 0;
 }
+
+.welcome-section {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('../assets/home_backgroundImg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: white;
+    padding: 20px;
+}
+.welcome-section h1 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 3em;
+    margin: 0;
+}
+
+.card-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin: 0 20px;
+    flex: 1;
+    max-width: 350px;
+    transition: transform 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+}
+
+.card h3 {
+    margin-top: 20px;
+    font-size: 1.5em;
+}

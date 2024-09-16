@@ -8,6 +8,7 @@
     <meta name="keywords" content="">
     <link rel="icon" href="" type="image/x-icon" class="logo">
     <link rel="stylesheet" href="global-styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="dynamicLinks.js"></script>
 </head>
 <body>
@@ -18,12 +19,39 @@
             <ul>
                 <li><a class="navLink active"  href="/home">Home</a></li>
                 <li><a class="navLink" href="/equipment">Geräte/Kurse</a></li>
-                <li><a class="navLink restricted" href="/trainingdata">Trainingsplan</a></li>
+                <li><a class="navLink restricted" href="/trainingdata">Trainingsdaten</a></li>
+                <li><a class="navLink restricted" href="#">Trainingsplan</a></li>
                 <li id="login"><a href="/login">Login</a></li>
                 <li id="logout"><a href="/logout">Logout</a></li>
             </ul>
         </nav>
     </header>
+
+    <section class="welcome-section">
+        <div>
+            <h1>Willkommen</h1>
+        </div>
+    </section>
+
+    <!-- Karten -->
+    <div class="card-container">
+        <div class="card">
+            <img src="https://via.placeholder.com/100" alt="Trainingsplan Icon">
+            <h3>Mein Trainingsplan</h3>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/100" alt="Trainingsplan Icon">
+            <h3>Meine Trainingsdaten</h3>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/100" alt="Statistiken Icon">
+            <h3>Statistiken</h3>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/100" alt="Geräte Übersicht Icon">
+            <h3>Geräte Übersicht</h3>
+        </div>
+    </div>
 
     <main>
         <script src="index.js"></script>
