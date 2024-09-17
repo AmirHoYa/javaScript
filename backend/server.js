@@ -202,6 +202,7 @@ app.get('/trainingdata/info', (req, res) => {
         available: boolean,
         reservedByMe: boolean,
         (freeSlots: int) //courses only
+        (totalSlots: int) //courses only
     }
     // For tab requests as an array of multiple jsons.
  */
@@ -269,7 +270,8 @@ function courseJson(element, email) {
         desc: element.desc,
         available: available,
         reservedByMe: reservedByMe,
-        freeSlots: freeSlots
+        freeSlots: freeSlots,
+        totalSlots: element.capacity
     };
 }
 

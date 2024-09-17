@@ -1,58 +1,82 @@
 {
     "c001":{
         "id":"c001",
-        "name":"Einzeltraining 1",
-        "desc":"",
+        "name":"Personalisiertes Krafttraining",
+        "desc":"Im Einzeltraining wird ein individuell abgestimmter Trainingsplan erstellt, der gezielt auf deine Bedürfnisse und Ziele ausgerichtet ist. Ob Muskelaufbau, Fettverbrennung oder allgemeine Fitness – du erhältst persönliche Betreuung und Korrektur der Technik, um das Beste aus jedem Training herauszuholen.",
+        "img":"/assets/krafttraining.jpg",
         "capacity": 1,
-        "reservedBy":[]
+        "reservedBy":["third@user.com"]
     },
     "c002":{
         "id":"c002",
-        "name":"Einzeltraining 2",
-        "desc":"",
+        "name":"Functional Fitness Coaching",
+        "desc":"Dieses Einzeltraining konzentriert sich auf funktionelle Übungen, die den ganzen Körper einbeziehen und deine alltägliche Beweglichkeit verbessern. Der Trainer passt die Workouts an deine aktuellen Fähigkeiten an, um Kraft, Stabilität und Ausdauer zu fördern, während Verletzungsrisiken minimiert werden.",
+        "img":"/assets/functional-training.jpg",
         "capacity": 1,
-        "reservedBy":[]
+        "reservedBy":["test@user.de"]
     },
     "c003":{
         "id":"c003",
-        "name":"Einzeltraining 3",
-        "desc":"",
+        "name":"Individuelles Cardiotraining",
+        "desc":"Das Einzeltraining im Bereich Ausdauer und Herz-Kreislauf-Gesundheit wird speziell auf deine Fitnesslevel abgestimmt. Mit einem Mix aus Laufband, Intervalltraining und Übungen zur Steigerung der Ausdauer kannst du dein Cardiotraining optimieren, Kalorien verbrennen und deine Kondition nachhaltig verbessern.",
+        "img":"/assets/cardiotraining.jpg",
         "capacity": 1,
         "reservedBy":[]
     },
     "c004":{
         "id":"c004",
-        "name":"",
-        "desc":"",
-        "capacity": 1,
-        "reservedBy":[]
+        "name":"HIIT 1",
+        "desc":"HIIT ist ein intensives Intervalltraining, bei dem kurze Phasen von maximaler Anstrengung mit kurzen Erholungsphasen kombiniert werden. Es fördert die Fettverbrennung, steigert die Ausdauer und verbessert die allgemeine Fitness in kurzer Zeit.",
+        "img":"/assets/hiit.png",
+        "capacity": 10,
+        "reservedBy":["test@user.de","another@user.com","dummy"]
     },
     "c005":{
         "id":"c005",
-        "name":"",
-        "desc":"",
-        "capacity": 1,
-        "reservedBy":[]
+        "name":"HIIT 2",
+        "desc":"HIIT ist ein intensives Intervalltraining, bei dem kurze Phasen von maximaler Anstrengung mit kurzen Erholungsphasen kombiniert werden. Es fördert die Fettverbrennung, steigert die Ausdauer und verbessert die allgemeine Fitness in kurzer Zeit.",
+        "img":"/assets/hiit.png",
+        "capacity": 10,
+        "reservedBy":["another@user.com","third@user.com","dummy","dummy","dummy","dummy"]
     },
     "c006":{
         "id":"c006",
-        "name":"",
-        "desc":"",
-        "capacity": 1,
-        "reservedBy":[]
+        "name":"Yoga",
+        "desc":"Yoga kombiniert sanfte Bewegungen mit Atemtechniken und Meditation, um Körper und Geist in Einklang zu bringen. Es verbessert die Flexibilität, stärkt die Muskulatur und fördert die innere Ruhe und Ausgeglichenheit.",
+        "img":"/assets/yoga.png",
+        "capacity": 8,
+        "reservedBy":["third@user.com","dummy","dummy"]
     },
     "c007":{
         "id":"c007",
-        "name":"",
-        "desc":"",
-        "capacity": 1,
-        "reservedBy":[]
+        "name":"Zirkeltraining",
+        "desc":"Zirkeltraining ist eine vielseitige Trainingsmethode, bei der verschiedene Stationen mit unterschiedlichen Übungen nacheinander absolviert werden. Es trainiert sowohl Kraft als auch Ausdauer und eignet sich für Teilnehmer aller Fitnessniveaus.",
+        "img":"/assets/zirkel.png",
+        "capacity": 15,
+        "reservedBy":["third@user.com","dummy","dummy","dummy","dummy"]
     },
     "c008":{
         "id":"c008",
-        "name":"",
-        "desc":"",
-        "capacity": 1,
-        "reservedBy":[]
+        "name":"Tanzen/HipHop",
+        "desc":"Der Tanzkurs „HipHop“ kombiniert rhythmische Bewegungen zu dynamischer Musik. Es ist ein spaßiges und kreatives Workout, das Ausdauer, Koordination und Körperbeherrschung fördert und gleichzeitig die Kondition verbessert.",
+        "img":"/assets/tanz.png",
+        "capacity": 8,
+        "reservedBy":["test@user.de","another@user.com","dummy"]
+    },
+    "c009":{
+        "id":"c009",
+        "name":"Dehnen",
+        "desc":"Dieser Kurs fokussiert sich auf gezielte Dehnübungen, um die Flexibilität zu verbessern und Muskelverspannungen zu lösen. Regelmäßiges Dehnen fördert die Beweglichkeit und reduziert das Verletzungsrisiko.",
+        "img":"/assets/dehnen.png",
+        "capacity": 10,
+        "reservedBy":["another@user.com","third@user.com","dummy","dummy"]
+    },
+    "c010":{
+        "id":"c010",
+        "name":"Ropeskipping",
+        "desc":"Ropeskipping, also das Springen mit dem Seil, ist ein effektives Ausdauertraining, das Herz-Kreislauf-Fitness, Koordination und Beinkraft verbessert. Es ist ein intensives Ganzkörper-Workout, das schnell Kalorien verbrennt und die Kondition steigert.",
+        "img":"/assets/ropeskipping.png",
+        "capacity": 4,
+        "reservedBy":["third@user.com","dummy"]
     }
 }

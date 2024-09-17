@@ -129,7 +129,6 @@ function buildEquipmentPanel(className, info) {
   const panel = document.createElement('div');
   panel.className = className;
   panel.id = info.id;
-  console.log(info.img);
   if (info.img) {panel.style.backgroundImage = `url(${info.img}), url(/assets/missing_image.jpg)`};
   panel.onclick = () => {details(info.id)};
   panel.innerHTML = `
@@ -146,10 +145,11 @@ function buildCoursePanel(className, info) {
   const panel = document.createElement('div');
   panel.className = className;
   panel.id = info.id;
+  if (info.img) {panel.style.backgroundImage = `url(${info.img}), url(/assets/missing_image.jpg)`};
   panel.onclick = () => {details(info.id)};
   panel.innerHTML = `
     <h2>${info.name}</h2>
-    <p>Freie Plätze: <span class="${spanClass}">${info.freeSlots}</span></p>
+    <p id="courseSlots">Freie Plätze: <span class="${spanClass}">${info.freeSlots}</span>/${info.totalSlots}</p>
   `;
   return panel;
 }
@@ -189,6 +189,10 @@ function applyDetails(data) {
     sub_unavailable: `<button class="disabled" id="subscribe")">${isEquipment ? 'Reservieren' : 'Anmelden'}</button>`,
     unsub: `<button id="unsubscribe" onclick="unsubscribe('${data.id}')">${isEquipment ? 'Stornieren' : 'Abmelden'}</button>`
   }
+  var spanClass = 'many';
+  if (data.freeSlots < 3) {spanClass = 'few'}
+  if (data.freeSlots == 0) {spanClass = 'none'}
+  const courseSlots = `<p id="courseSlots">Freie Plätze: <span class="${spanClass}">${data.freeSlots}</span>/${data.totalSlots}</p>`
   details.id = data.id;
   details.className = 'details';
   details.innerHTML = `
@@ -197,6 +201,7 @@ function applyDetails(data) {
     <div id="detail-info">
         <h2 id="name">${data.name}</h2>
         <p id="description">${data.desc}</p>
+        ${!isEquipment ? courseSlots : ''}
     </div>
     ${data.reservedByMe ? buttons.unsub : data.available ? buttons.sub_available : buttons.sub_unavailable}
     <button id="close" onclick="closeDetails()">X</button>

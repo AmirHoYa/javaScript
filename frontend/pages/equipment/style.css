@@ -58,6 +58,7 @@ main {
     transition: 0.3s;
     background-size: contain;
     background-repeat: no-repeat;
+    position: relative;
 }
 
 .panel:hover {
@@ -70,7 +71,11 @@ main {
 }
 
 .panel.reserved {
-    box-shadow: inset 0 0 5000px -20px rgb(51, 51, 51);
+    box-shadow: inset 0 0 5000px 30px #000;
+}
+
+.panel.reserved h2 {
+    color: #aaa;
 }
 
 .panel h2 {
@@ -78,6 +83,17 @@ main {
     color: #eeeeee;
     padding: 10px;
     border-radius: 15px 15px 0 0;
+}
+
+.panel p {
+    width: 100%;
+    padding: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 13px 13px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-sizing: border-box;
 }
 
 span.many {
@@ -151,6 +167,10 @@ span.none {
 #detail-info p {
     line-height: 1.2em;
     font-size: 1.4em;
+}
+
+#detail-info p#courseSlots {
+    margin-top: 10px;
 }
 
 #subscribe {
