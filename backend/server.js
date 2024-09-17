@@ -14,7 +14,7 @@ class DataService {
             let equipmentData = fs.readFileSync('backend/database/equipment.json');
             this.cache.equipment = JSON.parse(equipmentData);
         }
-        return this.cache.equipment;
+        return this.cloneJson(this.cache.equipment);
     }
 
     saveEquipment(equipment) {
@@ -25,40 +25,10 @@ class DataService {
         if (!this.cache.courses) {
             //read courses.json and put in cache
             console.log('loading courses from db')
-            //let equipmentData = fs.readFileSync('backend/database/equipment.json');
-            //this.cache.equipment = JSON.parse(equipmentData);
-            this.cache.courses = {"c1":{
-                id:"c1",
-                name:"Wassergymnastik",
-                capacity: 4,
-                reservedBy:[]
-            },
-            "c2":{
-                id:"c2",
-                name:"Zumba",
-                capacity: 4,
-                reservedBy:["test@user.de"]
-            },
-            "c3":{
-                id:"c3",
-                name:"Aerobik",
-                capacity: 4,
-                reservedBy:["another@user.com", "third@user.com"]
-            },
-            "c4":{
-                id:"c4",
-                name:"Personal",
-                capacity: 1,
-                reservedBy:["another@user.com"]
-            },
-            "c5":{
-                id:"c5",
-                name:"Personal 2",
-                capacity: 1,
-                reservedBy:["test@user.de"]
-            }}
+            let coursesData = fs.readFileSync('backend/database/courses.json');
+            this.cache.courses = JSON.parse(coursesData);
         }
-        return this.cache.courses;
+        return this.cloneJson(this.cache.courses);
     }
 
     saveCourses(courses) {
@@ -73,6 +43,10 @@ class DataService {
             this.cache.misc = JSON.parse(detailData);
         }
         return this.cache.misc;
+    }
+
+    cloneJson(original) {
+        return JSON.parse(JSON.stringify(original));
     }
 }
 const dataService = new DataService();
