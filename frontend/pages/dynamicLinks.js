@@ -1,11 +1,10 @@
 document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('navLink')) {
+    if (e.target.classList.contains('navLink') || e.target.id === 'logo') {
         const urlParams = new URLSearchParams(window.location.search);
         const email = urlParams.get('email');
         const loggedIn = urlParams.get('loggedIn') === 'true';
         const isRestricted = e.target.classList.contains('restricted')
 
-        console.log(e.target);
         if (isRestricted && (!loggedIn || !email)) { // If function is login restricted and no user is logged in
             e.preventDefault(); // Prevent default link behavior
             alert('Diese Funktion ist nur mit einem Login zugänglich!');
@@ -23,21 +22,4 @@ document.addEventListener('click', (e) => {
     if (e.target.parentElement.id === 'login') {
         e.target.href += `?redirectFrom=${location.pathname}`;
     }
-
-    if (e.target.id === 'logo') {
-        e.preventDefault();
-        var ref = '/redirect' + e.target.getAttribute('href');
-        location.pathname = ref;
-    }
-
-
-    /*
-    let target = e.target.closest('a');    
-    if (target) { // if the click was on or within an <a>
-        // then based on some condition...
-        if (target.getAttribute("href").startsWith("/foo")) {
-           e.preventDefault(); // tell the browser not to respond to the link click
-           // then maybe do something else
-        }
-    }*/
 });

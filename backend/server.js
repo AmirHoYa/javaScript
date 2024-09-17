@@ -139,7 +139,7 @@ function redirectWithParams(req, res, path) {
         }
     }
 
-    console.log(url)
+    console.log(`Redirecting to '${url}'`);
     res.redirect(url);
 }
 
@@ -195,11 +195,15 @@ app.get('/trainingdata/info', (req, res) => {
 /*
     response json:
     {
+        id: string,
         name: string,
+        img: string,
+        desc: string,
         available: boolean,
         reservedByMe: boolean,
         (freeSlots: int) //courses only
     }
+    // For tab requests as an array of multiple jsons.
  */
 app.get('/manage-equipment/equipment-tab/:email', (req, res) => {
     const email = req.params.email;
@@ -283,12 +287,7 @@ app.post('/manage-equipment/sub/:id/:email', (req, res) => {
     isEquipment ? dataService.saveEquipment(data) : dataService.saveCourses(data);
 
     var url = req.headers.referer;
-    if (url.endsWith('tab=course')) {
-        url = url.substring(0, url.length -11);
-    }
-    if (!isEquipment) {   
-        url+= url.includes('?') ? '&tab=course' : '?tab=course';
-    }
+    setTabParam(isEquipment, url);
     res.redirect(url);
 });
 
@@ -307,14 +306,23 @@ app.post('/manage-equipment/unsub/:id/:email', (req, res) => {
     isEquipment ? dataService.saveEquipment(data) : dataService.saveCourses(data);
 
     var url = req.headers.referer;
+    setTabParam(isEquipment, url);
+    res.redirect(url);
+});
+
+/**
+ * Appends or removes a tab parameter to the url to open the same tab on reloading.
+ * @param {boolean} isEquipment 
+ * @param {string} url 
+ */
+function setTabParam(isEquipment, url) {
     if (url.endsWith('tab=course')) {
         url = url.substring(0, url.length -11);
     }
     if (!isEquipment) {   
         url+= url.includes('?') ? '&tab=course' : '?tab=course';
     }
-    res.redirect(url);
-});
+}
 
 app.get('/user/:email', (req, res) => {
     const email = req.params.email;

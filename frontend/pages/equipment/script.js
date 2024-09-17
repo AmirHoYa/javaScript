@@ -67,6 +67,10 @@ function openTab(buttonId, tabName) {
   }
 } 
 
+/**
+ * Loads information of a tab from the server. 
+ * @param {*} tab 
+ */
 function loadInfo(tab) {
   fetch(`/manage-equipment/${tab.id}/${email}`, {
     method: 'GET',
@@ -81,12 +85,16 @@ function loadInfo(tab) {
     return response.json();
   })
   .then(json => {
-    console.log(json);
     applyInfo(tab, json);
   })
   .catch(error => console.error('Error:', error));
 };
 
+/**
+ * Populates the tab with panels of information retrieved from the server.
+ * @param {*} tab 
+ * @param {*} infos 
+ */
 function applyInfo(tab, infos) {
   if (!email) {
     document.querySelector(`#${tab.id} #personal`).style.display = 'none';
@@ -146,6 +154,10 @@ function buildCoursePanel(className, info) {
   return panel;
 }
 
+/**
+ * Load details of the specified panel from the server to show in a seperate div.
+ * @param {string} panelId 
+ */
 function details(panelId) {
   fetch(`/manage-equipment/${panelId}/${email}`, {
     method: 'GET',
@@ -160,12 +172,15 @@ function details(panelId) {
     return response.json();
   })
   .then(json => {
-    console.log(json);
     applyDetails(json);
   })
   .catch(error => console.error('Error:', error));
 }
 
+/**
+ * Generates and populates a 'details' div to show additional information of a selected panel.
+ * @param {*} data 
+ */
 function applyDetails(data) {
   const isEquipment = data.id.startsWith('g');
   const details = document.createElement('div');
@@ -193,12 +208,20 @@ function applyDetails(data) {
   selected.style.display = 'block';
 }
 
+/**
+ * Closes the 'details' div.
+ */
 function closeDetails() {
   const selected = document.getElementById('selected');
   selected.removeChild(selected.firstChild);
   selected.style.display = 'none';
 }
 
+/**
+ * Subcribes to a course or equipment. Reloads page after success.
+ * If user is not logged in, automatically redirects to the login and back.
+ * @param {string} panelId
+ */
 function subscribe(panelId) {
   if (!email) {
     alert('Für diese Funktion müssen Sie eingeloggt sein!');
@@ -218,8 +241,15 @@ function subscribe(panelId) {
       return response.text();
     }
   })
+  .then(text => {
+    if (text) {alert(text)}
+  });
 }
 
+/**
+ * Unsubscribes to a course or equipment. Reloads page after success.
+ * @param {string} panelId
+ */
 function unsubscribe(panelId) {
   fetch(`/manage-equipment/unsub/${panelId}/${email}`, {
     method: 'POST',
@@ -234,4 +264,7 @@ function unsubscribe(panelId) {
       return response.text();
     }
   })
+  .then(text => {
+    if (text) {alert(text)}
+  });
 }
