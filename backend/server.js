@@ -13,22 +13,6 @@ class DataService {
             console.log('loading equipment from db')
             let equipmentData = fs.readFileSync('backend/database/equipment.json');
             this.cache.equipment = JSON.parse(equipmentData);
-            /* this.cache.equipment = {
-            "g1":{
-                id:"g1",
-                name:"Gerät",
-                reservedBy:null
-            },
-            "g2":{
-                id:"g2",
-                name:"Anderes Gerät",
-                reservedBy:"test@user.de"
-            },
-            "g3":{
-                id:"g3",
-                name:"Tolles Gerät",
-                reservedBy:"another@user.com"
-            }} */
         }
         return this.cache.equipment;
     }
@@ -41,6 +25,8 @@ class DataService {
         if (!this.cache.courses) {
             //read courses.json and put in cache
             console.log('loading courses from db')
+            //let equipmentData = fs.readFileSync('backend/database/equipment.json');
+            //this.cache.equipment = JSON.parse(equipmentData);
             this.cache.courses = {"c1":{
                 id:"c1",
                 name:"Wassergymnastik",
@@ -77,6 +63,16 @@ class DataService {
 
     saveCourses(courses) {
         this.cache.courses = courses;
+    }
+
+    loadDetails() {
+        if (!this.cache.misc) {
+            //read misc.json and put in cache
+            console.log('loading misc from db')
+            let detailData = fs.readFileSync('backend/database/misc.json');
+            this.cache.misc = JSON.parse(detailData);
+        }
+        return this.cache.misc;
     }
 }
 const dataService = new DataService();
@@ -232,40 +228,26 @@ app.get('/trainingdata/info', (req, res) => {
     }
  */
 app.get('/manage-equipment/equipment-tab/:email', (req, res) => {
+    const email = req.params.email;
+    const details = dataService.loadDetails();
     var equipment = dataService.loadEquipment();
     var response = [];
     for (const key in equipment) {
         const element = equipment[key];
-        var reserved = element.reservedBy ? true : false;
-        var reservedByMe = req.params.email && element.reservedBy === req.params.email;
-        response.push({
-            id: element.id,
-            name: element.name,
-            img: element.img,
-            available: !reserved,
-            reservedByMe: reservedByMe
-        })
+        response.push(equipmentJson(element, email, details));
     }
 
     res.send(response);
 })
 
 app.get('/manage-equipment/course-tab/:email', (req, res) => {
+    const email = req.params.email;
+    const details = dataService.loadDetails();
     var courses = dataService.loadCourses();
     var response = [];
     for (const key in courses) {
         const element = courses[key];
-        var reservedByMe = req.params.email && element.reservedBy.includes(req.params.email);
-        var freeSlots = element.capacity - element.reservedBy.length;
-        var available = freeSlots > 0 || reservedByMe;
-        response.push({
-            id: element.id,
-            name: element.name,
-            img: element.img,
-            available: available,
-            reservedByMe: reservedByMe,
-            freeSlots: freeSlots
-        })
+        response.push(courseJson(element, email, details));
     }
     
     res.send(response);
@@ -278,29 +260,40 @@ app.get('/manage-equipment/:id/:email', (req, res) => {
     const data = isEquipment ? dataService.loadEquipment() : dataService.loadCourses();
     const element = data[id];
     if (isEquipment) {
-        var reserved = element.reservedBy ? true : false;
-        var reservedByMe = req.params.email && element.reservedBy === req.params.email;
-        res.json({
-            id: element.id,
-            name: element.name,
-            img: element.img,
-            available: !reserved,
-            reservedByMe: reservedByMe
-        })
+        res.json(equipmentJson(element, email));
     } else {
-        var reservedByMe = req.params.email && element.reservedBy.includes(req.params.email);
-        var freeSlots = element.capacity - element.reservedBy.length;
-        var available = freeSlots > 0 || reservedByMe;
-        res.json({
-            id: element.id,
-            name: element.name,
-            img: element.img,
-            available: available,
-            reservedByMe: reservedByMe,
-            freeSlots: freeSlots
-        });
+        res.json(courseJson(element, email));
     }
 });
+
+function equipmentJson(element, email) {
+    const elementDetail = dataService.loadDetails().equipment[element.type];
+    const reserved = element.reservedBy ? true : false;
+    const reservedByMe = email && element.reservedBy === email;
+    return {
+        id: element.id,
+        name: element.name,
+        img: elementDetail.img,
+        desc: elementDetail.desc,
+        available: !reserved,
+        reservedByMe: reservedByMe
+    };
+}
+
+function courseJson(element, email) {
+    const reservedByMe = email && element.reservedBy.includes(email);
+    const freeSlots = element.capacity - element.reservedBy.length;
+    const available = freeSlots > 0 || reservedByMe;
+    return {
+        id: element.id,
+        name: element.name,
+        img: element.img,
+        desc: element.desc,
+        available: available,
+        reservedByMe: reservedByMe,
+        freeSlots: freeSlots
+    };
+}
 
 app.post('/manage-equipment/sub/:id/:email', (req, res) => {
     const id = req.params.id;

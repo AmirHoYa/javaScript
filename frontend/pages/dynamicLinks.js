@@ -13,11 +13,6 @@ document.addEventListener('click', (e) => {
             return;
         }
 
-        if (isRestricted) { // Redirects to new url and keeps login info as params
-            e.target.href = `${e.target.href}?loggedIn=true&email=${encodeURIComponent(email)}`
-            return;
-        }
-
         e.preventDefault(); // Prevent default link behavior
         // Replace the path of URL after the domain with the value from the a-tags href attribute (not the whole href, as that includes the domain).
         // This ensures it keeps any params the URL may contain.
@@ -27,6 +22,12 @@ document.addEventListener('click', (e) => {
 
     if (e.target.parentElement.id === 'login') {
         e.target.href += `?redirectFrom=${location.pathname}`;
+    }
+
+    if (e.target.id === 'logo') {
+        e.preventDefault();
+        var ref = '/redirect' + e.target.getAttribute('href');
+        location.pathname = ref;
     }
 
 

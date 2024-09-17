@@ -2,115 +2,115 @@
     "g001":{
         "id":"g001",
         "name":"Beinpresse 1",
-        "reservedBy":"ddd",
-        "img":"/assets/beinpresse.jpg"
+        "reservedBy":null,
+        "type":"bp"
     },
     "g002":{
         "id":"g002",
         "name":"Beinpresse 2",
         "reservedBy":null,
-        "img":"/assets/beinpresse.jpg"
+        "type":"bp"
     },
     "g003":{
         "id":"g003",
         "name":"Beinpresse 3",
         "reservedBy":null,
-        "img":"/assets/beinpresse.jpg"
+        "type":"bp"
     },
     "g004":{
         "id":"g004",
         "name":"Beinpresse 4",
         "reservedBy":null,
-        "img":"/assets/beinpresse.jpg"
+        "type":"bp"
     },
     "g005":{
         "id":"g005",
         "name":"Hantelbank 1",
         "reservedBy":null,
-        "img":"/assets/hantelbank.png"
+        "type":"hb"
     },
     "g006":{
         "id":"g006",
         "name":"Hantelbank 2",
         "reservedBy":null,
-        "img":"/assets/hantelbank.png"
+        "type":"hb"
     },
     "g007":{
         "id":"g007",
         "name":"Hantelbank 3",
         "reservedBy":null,
-        "img":"/assets/hantelbank.png"
+        "type":"hb"
     },
     "g008":{
         "id":"g008",
         "name":"Kabelzugstation 1",
         "reservedBy":null,
-        "img":"/assets/kabelzug.png"
+        "type":"kaz"
     },
     "g009":{
         "id":"g009",
         "name":"Kabelzugstation 2",
         "reservedBy":null,
-        "img":"/assets/kabelzug.png"
+        "type":"kaz"
     },
     "g010":{
         "id":"g010",
         "name":"Klimmzugstange 1",
         "reservedBy":null,
-        "img":"/assets/klimmzug.png"
+        "type":"klz"
     },
     "g011":{
         "id":"g011",
         "name":"Klimmzugstange 2",
         "reservedBy":null,
-        "img":"/assets/klimmzug.png"
+        "type":"klz"
     },
     "g012":{
         "id":"g012",
         "name":"Klimmzugstange 3",
         "reservedBy":null,
-        "img":"/assets/klimmzug.png"
+        "type":"klz"
     },
     "g013":{
         "id":"g013",
         "name":"Beinstrecker 1",
         "reservedBy":null,
-        "img":"/assets/beinstrecker.png"
+        "type":"bs"
     },
     "g014":{
         "id":"g014",
         "name":"Beinstrecker 2",
         "reservedBy":null,
-        "img":"/assets/beinstrecker.png"
+        "type":"bs"
     },
     "g015":{
         "id":"g015",
         "name":"Rudern",
         "reservedBy":null,
-        "img":"/assets/rudern.png"
+        "type":"rn"
     },
     "g016":{
         "id":"g016",
         "name":"Laufband 1",
         "reservedBy":null,
-        "img":"/assets/laufband.png"
+        "type":"lb"
     },
     "g017":{
         "id":"g017",
         "name":"Laufband 2",
         "reservedBy":null,
-        "img":"/assets/laufband.png"
+        "type":"lb"
     },
     "g018":{
         "id":"g018",
         "name":"Laufband 3",
         "reservedBy":null,
-        "img":"/assets/laufband.png"
+        "type":"lb"
     },
     "g019":{
         "id":"g019",
         "name":"Laufband 4",
         "reservedBy":null,
-        "img":"/assets/laufband.png"
+        "type":"lb"
     }
 }

@@ -171,22 +171,22 @@ function applyDetails(data) {
   const details = document.createElement('div');
   const buttons = {
     sub_available: `<button id="subscribe" onclick="subscribe('${data.id}')">${isEquipment ? 'Reservieren' : 'Anmelden'}</button>`,
-    sub_unavailable: `<button class="disabled" id="subscribe" onclick="alert('${isEquipment ? 'Reservieren' : 'Anmelden'} nicht möglich!')">${isEquipment ? 'Reservieren' : 'Anmelden'}</button>`,
+    sub_unavailable: `<button class="disabled" id="subscribe")">${isEquipment ? 'Reservieren' : 'Anmelden'}</button>`,
     unsub: `<button id="unsubscribe" onclick="unsubscribe('${data.id}')">${isEquipment ? 'Stornieren' : 'Abmelden'}</button>`
   }
   details.id = data.id;
   details.className = 'details';
   details.innerHTML = `
-    <img src="${data.img}" width="200" height="200" alt="">
-    <hr id="separator">
+    <img src="${data.img}" width="230" height="230" alt="">
+    <hr id="seperator">
     <div id="detail-info">
         <h2 id="name">${data.name}</h2>
-        <p id="description"></p>
+        <p id="description">${data.desc}</p>
     </div>
     ${data.reservedByMe ? buttons.unsub : data.available ? buttons.sub_available : buttons.sub_unavailable}
     <button id="close" onclick="closeDetails()">X</button>
   `;
-
+  
   const selected = document.getElementById('selected');
   if (selected.hasChildNodes()) {selected.removeChild(selected.firstChild);}
   selected.appendChild(details)

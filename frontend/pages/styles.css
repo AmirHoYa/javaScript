@@ -18,10 +18,12 @@
 }
 .welcome-section h1 {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    bottom: 0;
+    left: 0;
     font-size: 3em;
     margin: 0;
+    padding: 20px;
+    background-image: linear-gradient(to right, rgba(200,200,200,1), rgba(200,200,200,0.5));
 }
 
 .card {
@@ -57,10 +59,26 @@
 
 .info {
     display: none;
+    width: 90%;
+    margin: 10px auto;
 }
 
 .info.active {
     display: block;
+}
+
+.info h2 {
+    line-height: 2.5em;
+    font-size: 3em;
+    width: 100%;
+    text-align: center;
+}
+
+.info p {
+    line-height: 1.5em;
+    font-size: 1.7em;
+    width: 100%;
+    text-align: center;
 }
 
 #userName {

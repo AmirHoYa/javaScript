@@ -18,6 +18,10 @@ header h1 {
     width: fit-content;
 }
 
+header #logo {
+    text-decoration: none;
+}
+
 h1#page-title {
     margin-left: auto;
     margin-right: auto;
@@ -81,3 +85,4 @@ nav a:hover,nav p:hover {
     margin: 1.5em auto;
     width: 97%;
 }
+

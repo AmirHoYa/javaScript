@@ -1,0 +1,58 @@
+{
+    "c001":{
+        "id":"c001",
+        "name":"Einzeltraining 1",
+        "desc":"",
+        "capacity": 1,
+        "reservedBy":[]
+    },
+    "c002":{
+        "id":"c002",
+        "name":"Einzeltraining 2",
+        "desc":"",
+        "capacity": 1,
+        "reservedBy":[]
+    },
+    "c003":{
+        "id":"c003",
+        "name":"Einzeltraining 3",
+        "desc":"",
+        "capacity": 1,
+        "reservedBy":[]
+    },
+    "c004":{
+        "id":"c004",
+        "name":"",
+        "desc":"",
+        "capacity": 1,
+        "reservedBy":[]
+    },
+    "c005":{
+        "id":"c005",
+        "name":"",
+        "desc":"",
+        "capacity": 1,
+        "reservedBy":[]
+    },
+    "c006":{
+        "id":"c006",
+        "name":"",
+        "desc":"",
+        "capacity": 1,
+        "reservedBy":[]
+    },
+    "c007":{
+        "id":"c007",
+        "name":"",
+        "desc":"",
+        "capacity": 1,
+        "reservedBy":[]
+    },
+    "c008":{
+        "id":"c008",
+        "name":"",
+        "desc":"",
+        "capacity": 1,
+        "reservedBy":[]
+    }
+}

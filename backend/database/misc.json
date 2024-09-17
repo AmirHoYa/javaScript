@@ -1,0 +1,32 @@
+{
+    "equipment":{
+        "bp":{
+            "desc":"Die Beinpresse ist ein Kraftgerät, das gezielt die Oberschenkel- und Gesäßmuskulatur trainiert. Durch die verstellbare Plattform wird der Widerstand individuell anpassbar, um eine effektive Stärkung der unteren Körperpartie zu ermöglichen.",
+            "img":"/assets/beinpresse.jpg"
+        },
+        "hb":{
+            "desc":"Die Hantelbank ist ein vielseitiges Fitnessgerät für das Krafttraining. In Kombination mit Hanteln oder einer Langhantel ermöglicht sie gezielte Übungen für Brust, Schultern und Arme. Die Bank ist oft neigbar, um verschiedene Muskelgruppen anzusprechen.",
+            "img":"/assets/hantelbank.jpg"
+        },
+        "kaz":{
+            "desc":"Die Kabelzugstation bietet eine Vielzahl von Übungsmöglichkeiten für den ganzen Körper. Durch das flexible Seilzugsystem können verschiedene Muskelgruppen wie Brust, Rücken, Arme und Beine isoliert oder in Kombination trainiert werden.",
+            "img":"/assets/kabelzug.jpg"
+        },
+        "klz":{
+            "desc":"Die Klimmzugstange ist ein einfaches, aber effektives Gerät für das Oberkörpertraining. Sie ermöglicht Klimmzüge und andere Übungen, die insbesondere den Rücken, die Schultern und die Arme stärken.",
+            "img":"/assets/klimmzug.webp"
+        },
+        "bs":{
+            "desc":"Der Beinstrecker ist ein Gerät, das gezielt den vorderen Oberschenkelmuskel trainiert. Durch das Strecken der Beine gegen einen Widerstand wird die Muskulatur isoliert und effektiv gekräftigt.",
+            "img":"/assets/beinstrecker.jpg"
+        },
+        "rn":{
+            "desc":"Das Rudergerät bietet ein effektives Ganzkörpertraining. Es simuliert die Bewegung des Ruderns und trainiert dabei vor allem den Rücken, die Schultern und die Arme, während auch die Beinmuskulatur aktiviert wird.",
+            "img":"/assets/ruder.jpg"
+        },
+        "lb":{
+            "desc":"Das Laufband ist ein Cardiogerät, das das Laufen oder Gehen simuliert. Es eignet sich ideal für Ausdauertraining, Fettverbrennung und Herz-Kreislauf-Training, wobei Geschwindigkeit und Steigung individuell eingestellt werden können.",
+            "img":"/assets/laufband.jpg"
+        }
+    }
+}
