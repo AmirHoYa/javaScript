@@ -7,13 +7,20 @@ build-job:
   stage: build
   script:
     - echo "Building the project..."
+    - mkdir build
+    - echo "Build complete!" > build/status.txt
+  artifacts:
+    paths:
+      - build/
 
 test-job:
   stage: test
   script:
     - echo "Running tests..."
+    - echo "Tests passed!"
 
 deploy-job:
   stage: deploy
   script:
     - echo "Deploying application..."
+    - echo "Application deployed!"
